@@ -1,0 +1,33 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style1.css">
+</head>
+<body>
+    <header>
+        <h1>User Dashboard</h1>
+        <form action="/logout" method="get">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </header>
+
+    <p>Welcome, <%= user.name %>! You have applied for <%= applications.length %> jobs.</p>
+
+    <ul>
+        <% applications.forEach(application => { %>
+            <li>
+                <h2><%= application.templateId.title %></h2>
+                <p><strong>Description:</strong> <%= application.templateId.description %></p>
+                <p><strong>Requirements:</strong> <%= application.templateId.requirements %></p>
+                <p>Applied on: <%= application.appliedAt.toDateString() %></p>
+            </li>
+        <% }) %>
+    </ul>
+
+    <a href="/templates">Back to Templates</a>
+</body>
+</html>

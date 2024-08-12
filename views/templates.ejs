@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuvette</title>
+    <link rel="stylesheet" href="style1.css"> <!-- Link to your stylesheet -->
+</head>
+<body>
+    <header>
+        <div class="header"> 
+            <h1>Cuvette</h1>
+            <form action="/logout" method="get">
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </div>
+        <div class="dashboard-button">
+            <form action="/dashboard" method="get">
+                <button type="submit" class="dashboard-button">Dashboard</button>
+            </form>
+        </div>
+        <% if (user && user.isAdmin) { %>
+            <div class="new-button">
+                <form action="/newTemplate" method="get">
+                    <button type="submit" class="new-button">Create New Template</button>
+                </form>
+            </div>
+            <div class="edit-button">
+                <form action="/editTemplates" method="get">
+                    <button type="submit" class="edit-button">Edit Templates</button>
+                </form>
+            </div>
+        <% } %>
+    </header>
+   
+    
+    <div class="jobs"> 
+        
+        <ul>
+            <% if (templates && templates.length > 0) { %>
+                <% templates.forEach(template => { %>
+                    <li>
+                        <h2><%= template.title %></h2>
+                        <p><strong>Description:</strong> <%= template.description %></p>
+                        <p><strong>Requirements:</strong> <%= template.requirements %></p>
+
+                        <!-- Apply button -->
+                        <form action="/apply/<%= template._id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="apply" onclick="applyForJob()">Apply</button>
+                        </form>
+
+                        <% if (user && user.isAdmin) { %>
+                            <!-- Delete button (visible only to admins) -->
+                            <form action="/templates/<%= template._id %>/delete" method="POST" style="display:inline;">
+                                <button type="submit" class="delete">Delete</button>
+                            </form>
+                        <% } %>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <p>No job templates available. <a href="/newTemplate">Create a new one</a>.</p>
+            <% } %> 
+        </ul>
+    </div>
+    <script>
+        function applyForJob() {
+            alert('Job applied');
+        }
+    </script>
+</body>
+</html>

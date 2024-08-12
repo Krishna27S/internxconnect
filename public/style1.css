@@ -1,0 +1,76 @@
+
+.header{
+    background: #6c6cff;
+    
+    padding-top: 1px;
+    padding-bottom: 1px;
+    
+    border-radius: 10px;
+    display: flex;
+    
+
+}
+
+
+.logout-button{
+    background-color: #ffffff;
+    width: 55px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 1320px;
+    margin-top: 36px;
+}
+
+.new-button{
+    background-color: #ffffff;
+    width: 145px;
+    margin-top: -20px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.delete{
+    background-color: #fff3f3;
+    width: 55px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+.jobs{
+    background-color: #6c6cff;
+    border-radius: 10px;
+    width: 500px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+.dashboard-button{ 
+    background-color: #ffffff;
+    width: 85px;
+    height: 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 710px;
+    margin-top: 10px;
+}
+.edit-button{
+    background-color: #ffffff;
+    width: 145px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+.apply{
+    background-color: #fff3f3;
+    width: 55px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}

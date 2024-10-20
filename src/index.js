@@ -92,6 +92,7 @@ app.post('/templates', isAdmin, async (req, res) => {
     }
 });
 
+
 // Render form to edit a template (Admin only)
 app.get('/templates/:id/edit', isAdmin, async (req, res) => {
     try {
@@ -100,6 +101,7 @@ app.get('/templates/:id/edit', isAdmin, async (req, res) => {
             return res.status(404).send("Template not found");
         }
         res.render('editTemplate', { template: template });
+        
     } catch (error) {
         console.error("Error fetching template:", error);
         res.status(500).send("Internal Server Error");

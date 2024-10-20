@@ -2,68 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cuvette</title>
-    <link rel="stylesheet" href="style1.css"> <!-- Link to your stylesheet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Connect</title>
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
     <header>
-        <div class="header"> 
-            <h1>Cuvette</h1>
-            <form action="/logout" method="get">
-                <button type="submit" class="logout-button">Logout</button>
-            </form>
-        </div>
-        <div class="dashboard-button">
-            <form action="/dashboard" method="get">
-                <button type="submit" class="dashboard-button">Dashboard</button>
-            </form>
-        </div>
-        <% if (user && user.isAdmin) { %>
-            <div class="new-button">
-                <form action="/newTemplate" method="get">
-                    <button type="submit" class="new-button">Create New Template</button>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Job Connect</h1>
+            </div>
+            <div class="nav-buttons">
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+                <% if (user && user.isAdmin) { %>
+                    <a href="/newTemplate" class="btn btn-secondary">Create New Job</a>
+                    <a href="/editTemplates" class="btn btn-secondary">Edit Jobs</a>
+                <% } %>
+                <form action="/logout" method="get">
+                    <button type="submit" class="btn btn-outline">Logout</button>
                 </form>
             </div>
-            <div class="edit-button">
-                <form action="/editTemplates" method="get">
-                    <button type="submit" class="edit-button">Edit Templates</button>
-                </form>
-            </div>
-        <% } %>
+        </nav>
     </header>
-   
-    
-    <div class="jobs"> 
-        
-        <ul>
+
+    <main class="container">
+        <h2 class="section-title">Available Job Openings</h2>
+        <div class="job-list">
             <% if (templates && templates.length > 0) { %>
                 <% templates.forEach(template => { %>
-                    <li>
-                        <h2><%= template.title %></h2>
-                        <p><strong>Description:</strong> <%= template.description %></p>
-                        <p><strong>Requirements:</strong> <%= template.requirements %></p>
-
-                        <!-- Apply button -->
-                        <form action="/apply/<%= template._id %>" method="POST" style="display:inline;">
-                            <button type="submit" class="apply" onclick="applyForJob()">Apply</button>
-                        </form>
-
-                        <% if (user && user.isAdmin) { %>
-                            <!-- Delete button (visible only to admins) -->
-                            <form action="/templates/<%= template._id %>/delete" method="POST" style="display:inline;">
-                                <button type="submit" class="delete">Delete</button>
+                    <div class="job-card">
+                        <h3 class="job-title"><%= template.title %></h3>
+                        <p class="job-description"><%= template.description %></p>
+                        <div class="job-requirements">
+                            <h4>Requirements:</h4>
+                            <p><%= template.requirements %></p>
+                        </div>
+                        <div class="job-actions">
+                            <form action="/apply/<%= template._id %>" method="POST">
+                                <button type="submit" class="btn btn-apply" onclick="applyForJob()">Apply Now</button>
                             </form>
-                        <% } %>
-                    </li>
+                            <% if (user && user.isAdmin) { %>
+                                <form action="/templates/<%= template._id %>/delete" method="POST">
+                                    <button type="submit" class="btn btn-delete">Delete Job</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
                 <% }); %>
             <% } else { %>
-                <p>No job templates available. <a href="/newTemplate">Create a new one</a>.</p>
-            <% } %> 
-        </ul>
-    </div>
+                <p class="no-jobs">No job openings available at the moment. <% if (user && user.isAdmin) { %><a href="/newTemplate">Create a new job listing</a>.<% } %></p>
+            <% } %>
+        </div>
+    </main>
+
     <script>
         function applyForJob() {
-            alert('Job applied');
+            alert('Application submitted successfully!');
         }
     </script>
 </body>
